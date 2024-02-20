@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CatagoloProductosDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="id_Categoria" />
+    </Key>
+    <Property Name="id_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_Ca__267ABA7A" FromRole="Categorias" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="id_Producto" />
+    </Key>
+    <Property Name="id_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="id_Categoria" Type="Int32" />
+    <Property Name="imagen_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="Activo" Type="Boolean" />
+    <NavigationProperty Name="Categorias" Relationship="Self.FK__Productos__id_Ca__267ABA7A" FromRole="Productos" ToRole="Categorias" />
+  </EntityType>
+  <Association Name="FK__Productos__id_Ca__267ABA7A">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="id_Categoria" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="id_Categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CatagoloProductosDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <AssociationSet Name="FK__Productos__id_Ca__267ABA7A" Association="Self.FK__Productos__id_Ca__267ABA7A">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <EntitySet Name="Usuarios" EntityType="CatagoloProductosDBModel.Usuarios" />
+    <EntitySet Name="UsuariosTokens" EntityType="CatagoloProductosDBModel.UsuariosTokens" />
+    <AssociationSet Name="FK__UsuariosT__id_us__32E0915F" Association="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="UsuariosTokens" EntitySet="UsuariosTokens" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <NavigationProperty Name="UsuariosTokens" Relationship="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F" FromRole="Usuarios" ToRole="UsuariosTokens" />
+  </EntityType>
+  <EntityType Name="UsuariosTokens">
+    <Key>
+      <PropertyRef Name="id_Tokens" />
+    </Key>
+    <Property Name="id_Tokens" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tiempoMinutos" Type="Int32" />
+    <Property Name="fechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="fechaFin" Type="DateTime" />
+    <NavigationProperty Name="Usuarios" Relationship="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F" FromRole="UsuariosTokens" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK__UsuariosT__id_us__32E0915F">
+    <End Type="CatagoloProductosDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="CatagoloProductosDBModel.UsuariosTokens" Role="UsuariosTokens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="UsuariosTokens">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

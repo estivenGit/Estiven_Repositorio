@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CatagoloProductosDBModelStoreContainer" CdmEntityContainer="CatagoloProductosDBEntities">
+    <EntitySetMapping Name="LogErrores">
+      <EntityTypeMapping TypeName="CatagoloProductosDBModel.LogErrores">
+        <MappingFragment StoreEntitySet="LogErrores">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="Ayuda_en_linea" ColumnName="Ayuda_en_linea" />
+          <ScalarProperty Name="Fuente" ColumnName="Fuente" />
+          <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

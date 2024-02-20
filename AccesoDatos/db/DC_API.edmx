@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CatagoloProductosDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="id_Categoria" />
+          </Key>
+          <Property Name="id_Categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id_Producto" />
+          </Key>
+          <Property Name="id_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="2000" />
+          <Property Name="id_Categoria" Type="int" />
+          <Property Name="imagen_Producto" Type="nvarchar(max)" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="Pass" Type="varchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="UsuariosTokens">
+          <Key>
+            <PropertyRef Name="id_Tokens" />
+          </Key>
+          <Property Name="id_Tokens" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="tiempoMinutos" Type="int" />
+          <Property Name="fechaInicio" Type="datetime" />
+          <Property Name="fechaFin" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Productos__id_Ca__267ABA7A">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="id_Categoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatagoloProductosDBModelStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosTokens" EntityType="Self.UsuariosTokens" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Productos__id_Ca__267ABA7A" Association="Self.FK__Productos__id_Ca__267ABA7A">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CatagoloProductosDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="id_Categoria" />
+          </Key>
+          <Property Name="id_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_Ca__267ABA7A" FromRole="Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id_Producto" />
+          </Key>
+          <Property Name="id_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="id_Categoria" Type="Int32" />
+          <Property Name="imagen_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__Productos__id_Ca__267ABA7A" FromRole="Productos" ToRole="Categorias" />
+        </EntityType>
+        <Association Name="FK__Productos__id_Ca__267ABA7A">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="id_Categoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatagoloProductosDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <AssociationSet Name="FK__Productos__id_Ca__267ABA7A" Association="Self.FK__Productos__id_Ca__267ABA7A">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <EntitySet Name="Usuarios" EntityType="CatagoloProductosDBModel.Usuarios" />
+          <EntitySet Name="UsuariosTokens" EntityType="CatagoloProductosDBModel.UsuariosTokens" />
+          <AssociationSet Name="FK__UsuariosT__id_us__32E0915F" Association="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosTokens" EntitySet="UsuariosTokens" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="UsuariosTokens" Relationship="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F" FromRole="Usuarios" ToRole="UsuariosTokens" />
+        </EntityType>
+        <EntityType Name="UsuariosTokens">
+          <Key>
+            <PropertyRef Name="id_Tokens" />
+          </Key>
+          <Property Name="id_Tokens" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tiempoMinutos" Type="Int32" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="fechaFin" Type="DateTime" />
+          <NavigationProperty Name="Usuarios" Relationship="CatagoloProductosDBModel.FK__UsuariosT__id_us__32E0915F" FromRole="UsuariosTokens" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK__UsuariosT__id_us__32E0915F">
+          <End Type="CatagoloProductosDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+          <End Type="CatagoloProductosDBModel.UsuariosTokens" Role="UsuariosTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="UsuariosTokens">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CatagoloProductosDBModelStoreContainer" CdmEntityContainer="CatagoloProductosDBEntities">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="CatagoloProductosDBModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="CatagoloProductosDBModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="id_Producto" ColumnName="id_Producto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+                <ScalarProperty Name="imagen_Producto" ColumnName="imagen_Producto" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="CatagoloProductosDBModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuariosTokens">
+            <EntityTypeMapping TypeName="CatagoloProductosDBModel.UsuariosTokens">
+              <MappingFragment StoreEntitySet="UsuariosTokens">
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="tiempoMinutos" ColumnName="tiempoMinutos" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_Tokens" ColumnName="id_Tokens" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

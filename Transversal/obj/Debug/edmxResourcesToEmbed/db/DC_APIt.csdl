@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CatagoloProductosDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LogErrores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Ayuda_en_linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fuente" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Metodo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="CatagoloProductosDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LogErrores" EntityType="Self.LogErrores" />
+  </EntityContainer>
+</Schema>
